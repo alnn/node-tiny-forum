@@ -23,4 +23,4 @@
 5. DELETE /message/:id to delete message
 
 ## Demo
- https://node-tiny-forum.herokuapp.com/message/list
+ https://node-tiny-forum.herokuapp.com/message
