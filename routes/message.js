@@ -28,7 +28,7 @@ module.exports = new Router({
 
     yield* next;
   })
-  .post('/create', function* () {
+  .post('/', function* () {
 
     const { header, body } = this.request.body;
 
@@ -47,7 +47,7 @@ module.exports = new Router({
 
     this.body = { ID };
   })
-  .post('/update/:id', function* () {
+  .post('/:id', function* () {
 
     const { header, body } = this.request.body;
 
@@ -60,7 +60,7 @@ module.exports = new Router({
 
     this.body = { ID };
   })
-  .get('/list', function* () {
+  .get('/', function* () {
 
     const result = yield Message.find();
     let list = {};
@@ -84,5 +84,4 @@ module.exports = new Router({
   .get('/:id', function* () {
 
     this.body = this.message.body;
-  })
-  .routes();
+  });

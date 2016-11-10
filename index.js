@@ -1,11 +1,12 @@
 'use strict';
+
 const koa = require('koa');
 const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
 
 const config = require('config');
-const messageRoutes = require('./routes/message');
+const messageRouter = require('./routes/message');
 
 /**
  * Connect to database
@@ -24,7 +25,7 @@ const app = koa();
  */
 middlewares.forEach(middleware => app.use(require(`./middlewares/${middleware}`)));
 
-app.use(messageRoutes);
+app.use(messageRouter.routes());
 
 if (module.parent) {
   /**

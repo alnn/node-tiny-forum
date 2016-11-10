@@ -36,7 +36,7 @@ describe('Message API', () => {
 
       const response = yield request({
         method: 'post',
-        url: getURL('/create'),
+        url: getURL('/'),
         json: true,
         body: {
           header: 'create test header',
@@ -54,7 +54,7 @@ describe('Message API', () => {
 
       const response = yield request({
         method: 'post',
-        url: getURL('/create'),
+        url: getURL('/'),
         json: true,
         body: {
           header: 'Test header'
@@ -69,7 +69,7 @@ describe('Message API', () => {
 
       const response = yield request({
         method: 'post',
-        url: getURL('/create'),
+        url: getURL('/'),
         json: true,
         body: {
           body: 'Test message body'
@@ -84,7 +84,7 @@ describe('Message API', () => {
 
       const response = yield request({
         method: 'post',
-        url: getURL(`/update/${messageToUpdate._id}`),
+        url: getURL(`/${messageToUpdate._id}`),
         json: true,
         body: {
           header: 'test header modified',
@@ -115,7 +115,7 @@ describe('Message API', () => {
 
       const response = yield request({
         method: 'get',
-        uri: getURL(`/list`),
+        uri: getURL('/'),
         json: true
       });
 
