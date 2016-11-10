@@ -9,5 +9,5 @@ module.exports = {
       replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } }
     }
   },
-  port: 9000
+  port: process.env.PORT || 9000
 };
