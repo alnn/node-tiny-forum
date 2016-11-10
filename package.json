@@ -7,7 +7,7 @@
     "dev": "NODE_ENV=development node index.js",
     "test": "NODE_ENV=test ./node_modules/.bin/mocha",
     "start": "NODE_ENV=production node index.js",
-    "start-on-heroku": "NODE_ENV=heroku node index.js"
+    "startheroku": "NODE_ENV=heroku node index.js"
   },
   "keywords": [
     "forum",
