@@ -3,7 +3,9 @@
 `npm install`
 
 **Run application**
-
+ 
+ note: node version should be 7
+ 
 `npm start`
 
 **Run Tests**
