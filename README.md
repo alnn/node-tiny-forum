@@ -11,6 +11,8 @@
 **Run Tests**
 
 `npm test`
+ or see here:
+ https://travis-ci.org/ernium/node-tiny-forum
 
 ## How to use
 
