@@ -19,3 +19,6 @@
 3. GET /message/:id to fetch message body
 4. GET /message/list to fetch all messages as id -> header
 5. DELETE /message/:id to delete message
+
+## Demo
+    https://node-tiny-forum.herokuapp.com/message/list
