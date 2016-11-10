@@ -10,7 +10,6 @@
 
 `npm test`
 
-
 ## How to use
 
 1. POST /message/create to create new message
