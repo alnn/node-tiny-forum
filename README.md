@@ -1,4 +1,7 @@
+**Run application**
+
+`npm start`
 
 **Run Tests**
 
-`npm run test`
+`npm test`
