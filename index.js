@@ -20,6 +20,8 @@ const middlewares = fs.readdirSync(path.join(__dirname, 'middlewares')).sort();
 
 const app = koa();
 
+require('koa-validate')(app);
+
 /**
  * load & use middlewares
  */

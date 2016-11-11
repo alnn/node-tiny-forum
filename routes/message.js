@@ -5,6 +5,23 @@ const mongoose = require('mongoose');
 const config = require('config');
 const Message = require('../models/message');
 
+/**
+ * Validation generator for incoming message create/update params
+ * @param next
+ */
+const genValidate = function* (next) {
+  this.checkBody('header').notEmpty();
+  this.checkBody('body').notEmpty();
+
+  if (this.errors) {
+    this.response.status = 400;
+    this.body = this.errors;
+    return;
+  }
+
+  yield next;
+};
+
 module.exports = new Router({
     prefix: '/message'
   })
@@ -28,16 +45,12 @@ module.exports = new Router({
 
     yield* next;
   })
-  .post('/', function* () {
+  /**
+   * POST /message with request body {header, body} to create new message
+   */
+  .post('/', genValidate, function* () {
 
     const { header, body } = this.request.body;
-
-    if (!body) {
-      this.throw(400, 'Message body required!');
-    }
-    if (!header) {
-      this.throw(400, 'Message header required!');
-    }
 
     const message = yield Message.create({
       body, header
@@ -47,7 +60,10 @@ module.exports = new Router({
 
     this.body = { ID };
   })
-  .post('/:id', function* () {
+  /**
+   * POST /message/:id with request body {header, body} to update message
+   */
+  .post('/:id', genValidate, function* () {
 
     const { header, body } = this.request.body;
 
@@ -60,6 +76,9 @@ module.exports = new Router({
 
     this.body = { ID };
   })
+  /**
+   * GET /message - fetch all messages as id -> header
+   */
   .get('/', function* () {
 
     const result = yield Message.find();
@@ -69,19 +88,24 @@ module.exports = new Router({
      * Compose object id -> header
      */
     result.forEach(item => {
-      item = item.toObject();
       list[item._id] = item.header;
     });
 
     this.body = { list };
   })
+  /**
+   * GET /message/:id to fetch message body
+   */
+  .get('/:id', function* () {
+
+    this.body = this.message.body;
+  })
+  /**
+   * DELETE /message/:id to delete message
+   */
   .del('/:id', function* () {
 
     yield this.message.remove();
 
     this.body = 'ok';
-  })
-  .get('/:id', function* () {
-
-    this.body = this.message.body;
   });

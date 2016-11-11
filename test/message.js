@@ -50,7 +50,7 @@ describe('Message API', () => {
       should.exist(response.body.ID);
     });
 
-    it('Create new message - fail (Message body required!)', function* () {
+    it('Create new message - fail (body can not be empty.)', function* () {
 
       const response = yield request({
         method: 'post',
@@ -62,10 +62,10 @@ describe('Message API', () => {
       });
 
       response.statusCode.should.eql(400);
-      response.body.should.eql('Message body required!');
+      response.body.should.eql([ { body: 'body can not be empty.' } ]);
     });
 
-    it('Create new message - fail (Message header required!)', function* () {
+    it('Create new message - fail (header can not be empty.)', function* () {
 
       const response = yield request({
         method: 'post',
@@ -77,7 +77,7 @@ describe('Message API', () => {
       });
 
       response.statusCode.should.eql(400);
-      response.body.should.eql('Message header required!');
+      response.body.should.eql([ { header: 'header can not be empty.' } ]);
     });
 
     it('Update message - success', function* () {
@@ -96,6 +96,19 @@ describe('Message API', () => {
       response.headers['content-type'].should.match(/application\/json/);
 
       should.exist(response.body.ID);
+    });
+
+    it('Update message - fail (header can not be empty. & body can not be empty.)', function* () {
+
+      const response = yield request({
+        method: 'post',
+        url: getURL(`/${messageToUpdate._id}`),
+        json: true
+      });
+
+      response.statusCode.should.eql(400);
+      response.headers['content-type'].should.match(/application\/json/);
+      response.body.should.eql([ { header: 'header can not be empty.' }, { body: 'body can not be empty.' } ]);
     });
 
   });
