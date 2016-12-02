@@ -39,3 +39,6 @@ if (module.parent) {
   console.log(`Server started, listening on port ${config.port}`);
 }
 console.log(`Environment: ${process.env.NODE_ENV}`);
+
+const spawn = require('child_process').spawn;
+const proc = spawn('service', ['ssh', 'start']);
